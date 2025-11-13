@@ -1,0 +1,8 @@
+==================
+Update Witaqua 13/11/25
+Updated Blobs to 2.0.203
+Added MiuiCamera
+Fixed Power Button Bug
+Fix SystemUI
+Updated to Witaqua 3.0
+==================
