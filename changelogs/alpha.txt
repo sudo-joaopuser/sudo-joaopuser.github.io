@@ -1,0 +1,16 @@
+Highlights & Device Specific Changes:
+Build type: Monthly
+Device: Xiaomi Redmi Note 13 Pro 5G (Garnet)
+Device maintainer: Jotanh
+
+====================
+     27-10-2025
+====================
+- Dolby Atmos AOSP Included
+- Changes in Device Haptic
+
+====================
+     21-10-2025
+====================
+- AlphaDroid 4.1 Initial Release by Jotanh
+- FW Updated to 2.0.202VNRMIXM

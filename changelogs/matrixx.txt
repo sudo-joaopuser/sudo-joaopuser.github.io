@@ -1,0 +1,8 @@
+Changelog
+October patch merged
+Fixed Freeform all app page opening in fullscreen
+Fix memory leaks
+Fix fingerprint crash in private space
+
+Notes
+KSU and SUSFS by Default
