@@ -1,0 +1,13 @@
+Update 11/11/25
+===========================
+Voltage OS 5.3
+Added Dolby Atmos
+Miui Camera Included
+New About Screen
+SecurePatch Updated
+===========================
+Voltage 5.0
+Initial Build
+Android 16
+End
+===========================
