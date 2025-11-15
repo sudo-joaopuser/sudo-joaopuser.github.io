@@ -1,0 +1,48 @@
+# Installation Guide for Redmi Note 13 Pro 5G
+::: warning
+Keep in mind that flashing a custom ROM will erase all data on your device, including apps, settings, and system files, effectively restoring it to a factory-like state. Double-check that your backups are complete and accessible before moving forward.
+:::
+
+## Enter Fastboot Mode
+- First, completely power off your device.
+- To enter Fastboot mode, press and hold the `Power` and `Volume Down` buttons simultaneously. Keep holding them until the Fastboot screen appears.
+
+## Connect Your Device to the PC
+- Use a reliable USB cable to connect your device to the PC.
+- Ensure that your PC has the necessary drivers installed for your device.
+
+## Flash Recovery
+::: info
+Ensure the image file (`recovery.img`) is in the same directory as your terminal/command prompt. Then, execute the following command:
+:::
+"bash(fastboot flash recovery recovery.img)"
+::: info
+After flashing, type
+:::
+
+"bash(fastboot reboot recovery)"
+## Flash Firmware and ROM
+
+- Download the FW
+(https://www.xmfirmwareupdater.com/firmware/garnet/)
+
+- Go to `Main Menu` > `Apply Update` > `Apply from ADB`.
+- On your PC, navigate to the directory where the FW file is saved.
+- Open a terminal in that directory.
+- Enter the sideload command:
+
+"bash(adb sideload <filename>.zip)"
+```
+- After flash FW flash the rom
+
+"bash(adb sideload rom.zip)"
+
+::: info
+This can take several minutes.
+:::
+- After the flash is complete, format the data.
+- Navigate to the "Wipe" or "Format Data" option in the recovery menu.
+- Select **Factory Reset** or **Format Data**. Confirm the action.
+
+- After the Format Data is complete, return to the main menu of the recovery.
+- Select `Reboot` > `System`.

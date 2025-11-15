@@ -747,3 +747,113 @@ header {
         font-size: 20px;
     }
 }
+
+
+
+
+/* Bash Style */
+
+
+.terminal-window {
+    background-color: #1E1E1E; 
+    border: 1px solid #333;
+    border-radius: 12px;
+    padding: 25px;
+    font-family: 'Fira Code', 'Source Code Pro', monospace; /* Font Term*/
+    font-size: 0.9rem;
+    overflow: hidden;
+    color: #E0E0E0; /* Text Color */
+}
+
+/* Container for line bash */
+.terminal-line {
+    display: block;
+    line-height: 1.6;
+    white-space: pre-wrap; 
+    word-break: break-all; 
+}
+
+
+.terminal-line.comment {
+    color: #6A9955; 
+    margin-top: 15px; 
+    font-style: italic;
+    font-weight: 500;
+}
+
+/* (Prompt + Comand) */
+.terminal-line.command {
+    color: #9CDCFE; 
+    margin-top: 10px;
+}
+
+/* O "user@host:~$" */
+.terminal-line .prompt {
+    color: #DCDCAA; 
+    font-weight: 600;
+    margin-right: 8px;
+}
+
+/* (Output) */
+.terminal-line.output {
+    color: #B5CEA8; 
+}
+
+/* =========================================
+   Mac Terminal Style
+   ========================================= */
+
+.mini-terminal {
+    background-color: #2E2E2E; 
+    border-radius: 10px;       
+    margin: 25px 5px;         
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.4);
+    border: 1px solid #4a4a4a;
+    overflow: hidden;         
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.mini-terminal-header {
+    background: linear-gradient(#E8E6E8, #D5D3D5); 
+    padding: 9px 12px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #BDBBBC;
+}
+
+.terminal-controls {
+    display: flex;
+    gap: 7px;
+}
+
+.traffic-light {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+}
+.btn-red    { background-color: #FF5F57; }
+.btn-yellow { background-color: #FFBD2E; }
+.btn-green  { background-color: #28C940; }
+
+.mini-terminal-body {
+    padding: 15px;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.9rem;
+}
+
+
+.mini-terminal-body .prompt {
+    color: #DCDCAA; 
+    font-weight: 600;
+    margin-right: 8px;
+}
+
+.mini-terminal-body .command {
+     color: #9CDCFE;
+}

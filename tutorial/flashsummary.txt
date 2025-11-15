@@ -1,0 +1,4 @@
+1- Flash recovery
+2- Flash FW
+3- Flash rom
+4- Format and Reboot
