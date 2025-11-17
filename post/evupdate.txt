@@ -1,0 +1,10 @@
+Changelog
+
+Update Changelog
+Added Spoof in evolver settings
+Now Added new Clock Fonts
+Added Battery Percentage
+Added Disable Windows Secure Flag
+Added Allow Downgrade Option
+
+Stay Update in www.jotanic.xyz for ROMs Updates
