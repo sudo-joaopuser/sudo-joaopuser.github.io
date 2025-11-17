@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../style.css">
+
+    <style>
+        /* =========================================
+           Term Theme
+           ========================================= */
+
+        .terminal-window {
+            background-color: #1E1E1E;
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 25px;
+            font-family: 'Fira Code', 'Source Code Pro', monospace;
+            font-size: 0.9rem;
+            overflow: hidden;
+            color: #E0E0E0;
+        }
+
+        .terminal-line {
+            display: block;
+            line-height: 1.6;
+            white-space: pre-wrap;
+            word-break: break-all;
+            scroll-margin-top: 20px; 
+        }
+
+        .terminal-line.comment {
+            color: #6A9955;
+            margin-top: 25px;
+            font-style: italic;
+            font-weight: 500;
+            font-size: 1.1rem;
+            border-bottom: 1px solid #333;
+            padding-bottom: 5px;
+        }
+
+ 
+        .terminal-line.command {
+            color: #9CDCFE;
+            margin-top: 10px;
+            display: flex;
+            flex-wrap: nowrap;
+        }
+        
+        .terminal-line.command > span:last-child {
+            word-break: break-all; 
+            white-space: pre-wrap; 
+        }
+
+
+
+        .terminal-line .prompt {
+            color: #DCDCAA;
+            font-weight: 600;
+            margin-right: 8px;
+            white-space: nowrap; 
+        }
+
+        .terminal-line.output {
+            color: #B5CEA8;
+        }
+
+        /* =========================================
+           (macOS Style)
+           ========================================= */
+        
+        .mini-terminal {
+            background-color: #2E2E2E;
+            border-radius: 10px;
+            margin: 25px 5px;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.4);
+            border: 1px solid #4a4a4a;
+            overflow: hidden;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .mini-terminal-header {
+            background: linear-gradient(#E8E6E8, #D5D3D5);
+            padding: 9px 12px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #BDBBBC;
+        }
+
+        .terminal-controls {
+            display: flex;
+            gap: 7px;
+        }
+
+        .traffic-light {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 1px solid rgba(0, 0, 0, 0.15);
+        }
+        .btn-red    { background-color: #FF5F57; }
+        .btn-yellow { background-color: #FFBD2E; }
+        .btn-green  { background-color: #28C940; }
+
+        .mini-terminal-body {
+            padding: 15px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+        }
+        
+
+        .mini-terminal-body .terminal-line.command {
+             color: #9CDCFE;
+        }
+
+
+        
+        .tutorial-layout {
+            display: flex;
+            gap: 25px;
+        }
+
+        .tutorial-main-content {
+            flex: 1;
+            min-width: 0; 
+        }
+
+        .toc-sidebar {
+            width: 260px;
+            position: sticky; 
+            top: 20px;
+            align-self: flex-start; 
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            padding: 20px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .toc-sidebar h4 {
+            font-size: 0.8rem;
+            color: #888;
+            text-transform: uppercase;
+            font-weight: 600;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #333;
+            margin-bottom: 10px;
+        }
+
+        .toc-sidebar ul { list-style: none; padding: 0; margin: 0; }
+
+        .toc-sidebar li a {
+            text-decoration: none;
+            padding: 8px 10px;
+            display: block;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            transition: all 0.2s ease;
+        }
+
+        .toc-sidebar li a:hover {
+            background-color: #25252a;
+            color: white;
+        }
+
+        .toc-sidebar .toc-title { font-weight: 600; color: #eee; }
+        .toc-sidebar .toc-subtitle { padding-left: 20px; font-size: 0.85rem; color: #999; }
+
+
+        @media screen and (max-width: 1024px) {
+            .tutorial-layout {
+                flex-direction: column; 
+            }
+            .toc-sidebar {
+                display: none; 
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="sidebar">
+        <div class="top-section">
+            <div class="profile-icon">
+                <span class="material-symbols-outlined">account_circle</span>
+            </div>
+            <button class="menu-btn">
+                <span class="material-symbols-outlined">menu</span>
+            </button>
+        </div>
+
+        <div class="nav-links">
+            <a href="../index.html" class="menu-btn active" style="text-decoration: none;">
+                <div class="icon-box">
+                    <span class="material-symbols-outlined">star</span>
+                </div>
+                <span>Home</span>
+            </a>
+            <a href="../roms.html" class="menu-btn" style="text-decoration: none;">
+                <span class="material-symbols-outlined">stars</span>
+                <span>Roms</span>
+            </a>
+            <a href="../about.html" class="menu-btn" style="text-decoration: none;">
+                <span class="material-symbols-outlined">account_circle</span>
+                <span>About</span>
+            </a>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <header>
+            <a href="../index.html" style="color: inherit; text-decoration: none; display: flex; align-items: center;">
+                <span class="material-symbols-outlined back-arrow">arrow_back</span>
+                <span>Back to Home</span>
+            </a>
+        </header>
+
+        <div class="tutorial-layout">
+        
+            <div class="tutorial-main-content">
+                <div class="hero-card" style="height: auto; padding: 30px;">
+                    <h1>Evox</h1>
+                    </div>
+                </div>
+
+                <div class="terminal-window" id="tutorial-content" data-file="evupdate.txt">
+                    <span class="terminal-line" style="color: #888;">Loading...</span>
+                </div>
+            </div>
+
+            <nav class="toc-sidebar">
+                <h4>Neste Tutorial</h4>
+                <ul id="tutorial-toc">
+                    <li style="color: #888; font-size: 0.9rem;">Loading summary...</li>
+                </ul>
+            </nav>
+        
+        </div> </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const terminal = document.getElementById('tutorial-content');
+            const toc = document.getElementById('tutorial-toc');
+            
+            const tutorialPath = terminal.getAttribute('data-file');
+            const summaryPath = 'flashsummary.txt'; 
+            
+            if (!tutorialPath) return;
+
+            const miniTermRegex = /bash\((.*?)\)/;
+
+            function createAnchorId(text) {
+                return text.trim()
+                    .toLowerCase()
+                    .replace(/^#\s*/, '')
+                    .replace(/[^a-z0-9\s-]/g, '')
+                    .replace(/\s+/g, '-')
+                    .replace(/-+/g, '-');
+            }
+
+
+            // Load Tutorial ---
+            fetch(tutorialPath)
+                .then(response => {
+                    if (!response.ok) throw new Error("File not found: " + tutorialPath);
+                    return response.text();
+                })
+                .then(text => {
+                    terminal.innerHTML = '';
+                    const lines = text.split('\n');
+
+                    lines.forEach(line => {
+                        const match = line.match(miniTermRegex);
+
+                        if (match) {
+                            // Bash Style(...)
+                            const commandText = match[1];
+                            const termWindow = document.createElement('div');
+                            termWindow.className = 'mini-terminal';
+                            termWindow.innerHTML = `
+                                <div class="mini-terminal-header">
+                                    <div class="terminal-controls">
+                                        <span class="traffic-light btn-red"></span>
+                                        <span class="traffic-light btn-yellow"></span>
+                                        <span class="traffic-light btn-green"></span>
+                                    </div>
+                                </div>
+                                <div class="mini-terminal-body">
+                                    <span class="terminal-line command">
+                                        <span class="prompt">user@host:~$</span>
+                                        <span>${commandText}</span>
+                                    </span>
+                                </div>
+                            `;
+                            terminal.appendChild(termWindow);
+
+                        } else if (line.startsWith('#')) {
+                            
+                            const lineElement = document.createElement('span');
+                            lineElement.classList.add('terminal-line', 'comment');
+                            lineElement.textContent = line;
+                            lineElement.id = createAnchorId(line); 
+                            terminal.appendChild(lineElement);
+                        
+                        } else if (line.startsWith('$')) {
+                            
+                            const lineElement = document.createElement('span');
+                            lineElement.classList.add('terminal-line', 'command');
+                            
+                            const promptElement = document.createElement('span');
+                            promptElement.classList.add('prompt');
+                            promptElement.textContent = 'user@host:~$';
+                            
+                            const cmdTextElement = document.createElement('span');
+                            cmdTextElement.textContent = line.substring(1); 
+                            
+                            lineElement.appendChild(promptElement);
+                            lineElement.appendChild(cmdTextElement); 
+                            terminal.appendChild(lineElement);
+                        
+                        } else {
+                            
+                            const lineElement = document.createElement('span');
+                            lineElement.classList.add('terminal-line', 'output');
+                            lineElement.textContent = line || ' ';
+                            terminal.appendChild(lineElement);
+                        }
+                    });
+                })
+                .catch(error => {
+                    console.error(error);
+                    terminal.innerHTML = `<span class="terminal-line" style="color: #ff6b6b;">Erro: ${error.message} (Use Live Server!)</span>`;
+                });
+
+            
+            // --- Sumarry ---
+            fetch(summaryPath)
+                .then(response => {
+                    if (!response.ok) throw new Error("File not found: " + summaryPath);
+                    return response.text();
+                })
+                .then(text => {
+                    toc.innerHTML = ''; 
+                    const lines = text.split('\n');
+
+                    lines.forEach(line => {
+                        if (line.trim() === '') return; 
+
+                        const li = document.createElement('li');
+                        const a = document.createElement('a');
+                        
+                        const anchorId = createAnchorId(line);
+                        a.href = '#' + anchorId;
+                        a.textContent = line.trim();
+
+                        if (line.startsWith('  ')) {
+                            li.classList.add('toc-subtitle');
+                        } else {
+                            li.classList.add('toc-title');
+                        }
+
+                        li.appendChild(a);
+                        toc.appendChild(li);
+                    });
+                })
+                .catch(error => {
+                    console.error(error);
+                    toc.innerHTML = '<li style="color: #ff6b6b; font-size: 0.9rem;">Erro ao carregar sumário.</li>';
+                });
+
+        });
+    </script>
+
+</body>
+</html>
