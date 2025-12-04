@@ -1,1 +1,8 @@
-Initial Build
+Initial QPR1 Los Base
+Fixed ScreenRecorder
+Kernel Update
+Added Effects Option
+Fixed Flash light
+Added Evolver Options
+Added ThemePack
+More Fixes

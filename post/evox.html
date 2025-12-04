@@ -78,37 +78,26 @@
                     </div>
                     <div class="info-item">
                         <span class="label">Date</span>
-                        <span class="value">17/11/2025</span>
+                        <span class="value">4/12/2025</span>
                     </div>
                     <div class="info-item">
                         <span class="label">Status</span>
-                        <span class="value" style="color: #bfaee3;">Stable</span>
+                        <span class="value" style="color: var(--accent-color);">Stable</span>
                     </div>
                 </div>
 
                 <h3>Changelog</h3>
                 <ul class="changelog-list" id="changelog-container" data-file="../changelogs/evox.txt">
-                    <li style="color: #888;">Loading changelog...</li>
+                    <li style="color: var(--text-secondary);">Loading changelog...</li>
                 </ul>
             </div>
 
             <div class="post-actions">
                 
-                <div class="download-group">
-                    <a href="https://drive.usercontent.google.com/download?id=1o1ziQc_Ap0hpU_NI8-xvj91g7gBnx3Rb&export=download" class="action-btn primary main-dl">
-                        <span class="material-symbols-outlined">download</span>
-                        11.5 QPR1 (Latest)
-                    </a>
-                    
-                    <button class="action-btn primary arrow-dl" onclick="toggleVersions()">
-                        <span class="material-symbols-outlined">expand_more</span>
-                    </button>
-
-                    <div id="version-menu" class="dropdown-menu">
-                        <p class="dropdown-title">Older Versions</p>
-
-                    </div>
-                </div>
+                <button id="open-download-modal-btn" class="action-btn primary" style="width: 100%; margin-bottom: 20px;">
+                    <span class="material-symbols-outlined">download</span>
+                    Download ROM
+                </button>
 
                 <a href="https://t.me/joaodoximichat" class="action-btn secondary">
                     <span class="material-symbols-outlined">memory</span>
@@ -127,70 +116,206 @@
             </div>
         </div>
 
-        <div id="screenshots-section" class="screenshots-container">
-            <h3>Screenshots</h3>
-            <div class="carousel">
-                <img src="../assets/evox/print1.jpg" class="carousel-item" alt="Print 1">
-                <img src="../assets/evox/print2.jpg" class="carousel-item" alt="Print 2">
-                <img src="../assets/evox/print3.jpg" class="carousel-item" alt="Print 3">
-                <img src="../assets/evox/print4.jpg" class="carousel-item" alt="Print 4">
-                <img src="../assets/evox/print5.jpg" class="carousel-item" alt="Print 5">
+        <div id="download-modal" class="modal">
+            <div class="modal-content download-list-modal">
+                
+                <div class="modal-info-header">Download EvolutionX - Redmi Note 13 Pro / Poco X6 5G</div>
+                
+                <div id="versions-list-container" class="versions-list-container">
+                    <div style="text-align: center; color: var(--text-secondary);">Loading versions...</div>
+                </div>
+
+                <div class="modal-footer-list-view">
+                    <span id="close-modal-text" class="modal-close-text">Close</span>
+                </div>
+
             </div>
         </div>
 
+        <div id="donation-modal" class="modal">
+            <div class="modal-content donation-content">
+                <span class="close-btn material-symbols-outlined" id="close-donation-modal">close</span>
+                
+                <h2>Download started</h2>
+
+                <div class="donation-image-container">
+                    <span class="material-symbols-outlined heart-icon">favorite</span>
+                </div>
+                
+                <p class="donation-message">
+                    Donations keep the servers running and help us build a better recovery for you.
+                    <br><br>
+                    Would you like to donate?
+                </p>
+
+                <div class="donation-actions">
+                    <a href="#" id="next-time-btn" class="action-btn secondary">Next time</a> 
+                    <a href="https://ko-fi.com/joaodoximi" id="donate-now-btn" class="action-btn donate-btn">
+                        <span class="material-symbols-outlined">favorite</span>
+                        Donate
+                    </a>
+                </div>
+            </div>
+        </div>
     </main>
 
     <script>
-        // Changelog
-        document.addEventListener("DOMContentLoaded", function() {
-            const listContainer = document.getElementById('changelog-container');
-            const filePath = listContainer.getAttribute('data-file');
+        const romVersions = [
+            {
+                version: "11.5 LOSBased",
+                variant: "GApps",
+                isLatest: true,
+                size: "2.9 GB",
+                url: "https://pixeldrain.com/u/okhrUjdz",
+            },
+            {
+                version: "11.5 AOSP OLD V",
+                variant: "GApps",
+                isLatest: false,
+                size: "2.7 GB",
+                url: "https://drive.usercontent.google.com/download?id=1o1ziQc_Ap0hpU_NI8-xvj91g7gBnx3Rb&export=download",
+            },
+            {
+                version: "11.2.1",
+                variant: "GApps",
+                isLatest: false,
+                size: "Download",
+                url: "#",
+            }
+        ];
 
-            if (filePath) {
-                fetch(filePath)
-                    .then(response => {
-                        if (!response.ok) throw new Error("File not found");
-                        return response.text();
-                    })
-                    .then(text => {
-                        listContainer.innerHTML = '';
-                        const lines = text.split('\n');
-                        
-                        lines.forEach(line => {
-                            if (line.trim() !== '') {
-                                const li = document.createElement('li');
-                                li.textContent = line;
-                                listContainer.appendChild(li);
-                            }
-                        });
-                    })
-                    .catch(error => {
-                        console.error(error);
-                        listContainer.innerHTML = '<li style="color: #ff6b6b;">Error Please Reload the page.</li>';
+        function loadChangelog(filePath, targetElementId) {
+            const listContainer = document.getElementById(targetElementId);
+            listContainer.innerHTML = '<li style="color: var(--text-secondary);">Loading changelog...</li>';
+            
+            fetch(filePath)
+                .then(response => {
+                    if (!response.ok) throw new Error("File not found: " + filePath);
+                    return response.text();
+                })
+                .then(text => {
+                    listContainer.innerHTML = '';
+                    const lines = text.split('\n');
+                    
+                    lines.forEach(line => {
+                        if (line.trim() !== '') {
+                            const li = document.createElement('li');
+                            li.textContent = line;
+                            listContainer.appendChild(li);
+                        }
                     });
-            }
-        });
-
-        // Version Menu
-        function toggleVersions() {
-            const menu = document.getElementById('version-menu');
-            if (menu.style.display === 'block') {
-                menu.style.display = 'none';
-            } else {
-                menu.style.display = 'block';
-            }
+                })
+                .catch(error => {
+                    console.error(error);
+                    listContainer.innerHTML = '<li style="color: #ff6b6b;">Erro ao carregar o changelog. Verifique o caminho do arquivo.</li>';
+                });
+        }
+        
+        function startDownload(url) {
+            window.open(url, '_blank'); 
+            document.getElementById('donation-modal').style.display = 'none';
         }
 
-        // Close Menu
-        window.onclick = function(event) {
-            if (!event.target.matches('.arrow-dl') && !event.target.matches('.arrow-dl *')) {
-                const menu = document.getElementById('version-menu');
-                if (menu && menu.style.display === 'block') {
-                    menu.style.display = 'none';
+        function prepareDownload(url) {
+            document.getElementById('download-modal').style.display = 'none';
+            document.getElementById('donation-modal').style.display = 'block';
+
+            const nextTimeBtn = document.getElementById('next-time-btn');
+            
+            nextTimeBtn.href = url;
+        }
+        
+        function renderVersionsList() {
+            const container = document.getElementById('versions-list-container');
+            container.innerHTML = ''; 
+
+            romVersions.forEach(rom => {
+                const card = document.createElement('div');
+                card.classList.add('version-card');
+
+                const infoDiv = document.createElement('div');
+                infoDiv.classList.add('version-info');
+
+                const versionText = document.createElement('span');
+                versionText.classList.add('version-number');
+                versionText.textContent = rom.version;
+
+                if (rom.isLatest) {
+                    const latestTag = document.createElement('span');
+                    latestTag.classList.add('version-label-tag');
+                    latestTag.textContent = 'Latest';
+                    versionText.appendChild(latestTag);
+                }
+
+                const variantText = document.createElement('span');
+                variantText.style.color = 'var(--text-secondary)';
+                variantText.textContent = `Variant: ${rom.variant}`;
+
+                infoDiv.appendChild(versionText);
+                infoDiv.appendChild(variantText);
+
+                const downloadLink = document.createElement('a');
+                downloadLink.classList.add('version-download-btn');
+                downloadLink.href = 'javascript:void(0)';
+                downloadLink.textContent = rom.size;
+                
+                downloadLink.onclick = function(event) {
+                    event.preventDefault(); 
+                    prepareDownload(rom.url); 
+                };
+                
+                card.appendChild(infoDiv);
+                card.appendChild(downloadLink);
+                
+                container.appendChild(card);
+            });
+            
+            document.getElementById('download-modal').style.display = 'block';
+        }
+
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const pageChangelogList = document.getElementById('changelog-container');
+            const pageChangelogPath = pageChangelogList.getAttribute('data-file');
+            if (pageChangelogPath) {
+                loadChangelog(pageChangelogPath, 'changelog-container');
+            }
+
+            const modal = document.getElementById('download-modal');
+            const donationModal = document.getElementById('donation-modal');
+            const openModalBtn = document.getElementById('open-download-modal-btn');
+            const nextTimeBtn = document.getElementById('next-time-btn');
+            const donateNowBtn = document.getElementById('donate-now-btn');
+
+            openModalBtn.onclick = function() {
+                renderVersionsList();
+            }
+
+            document.getElementById('close-modal-text').onclick = function() {
+                 modal.style.display = 'none';
+            }
+            
+            document.getElementById('close-donation-modal').onclick = function() {
+                 donationModal.style.display = 'none';
+            }
+
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = 'none';
+                }
+                if (event.target == donationModal) {
+                    donationModal.style.display = 'none';
                 }
             }
-        }
-    </script>
 
+            nextTimeBtn.addEventListener('click', function(event) {
+                document.getElementById('donation-modal').style.display = 'none';
+            });
+            
+            donateNowBtn.addEventListener('click', function(event) {
+                document.getElementById('donation-modal').style.display = 'none';
+            });
+        });
+    </script>
 </body>
 </html>
